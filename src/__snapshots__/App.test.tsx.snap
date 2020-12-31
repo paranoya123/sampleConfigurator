@@ -1,0 +1,200 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test App component 1`] = `
+<div
+  className="App"
+>
+  <label>
+    Material
+    <select
+      onChange={[Function]}
+      value={0}
+    >
+      <option
+        value={0}
+      >
+         
+        Gold
+         
+      </option>
+      <option
+        value={1}
+      >
+         
+        Platinum
+         
+      </option>
+      <option
+        value={2}
+      >
+         
+        Silver
+         
+      </option>
+    </select>
+  </label>
+  <label>
+    Color
+    <select
+      onChange={[Function]}
+      value={0}
+    >
+      <option
+        value={0}
+      >
+         
+        Red
+         
+      </option>
+      <option
+        value={1}
+      >
+         
+        Green
+         
+      </option>
+      <option
+        value={2}
+      >
+         
+        Blue
+         
+      </option>
+    </select>
+  </label>
+  <label>
+    Fineness
+    <select
+      onChange={[Function]}
+      value={0}
+    >
+      <option
+        value={0}
+      >
+         
+        500
+         
+      </option>
+      <option
+        value={1}
+      >
+         
+        585
+         
+      </option>
+      <option
+        value={2}
+      >
+         
+        700
+         
+      </option>
+    </select>
+  </label>
+  <label>
+    Sizes
+    <select
+      onChange={[Function]}
+      value={0}
+    >
+      <option
+        value={0}
+      >
+         
+        23
+         
+      </option>
+      <option
+        value={1}
+      >
+         
+        15
+         
+      </option>
+      <option
+        value={2}
+      >
+         
+        10
+         
+      </option>
+    </select>
+  </label>
+  <label>
+    Engraving :
+    <input
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </label>
+  <label>
+    Price: 
+    0
+  </label>
+</div>
+`;
+
+exports[`Snapshot test Select component with materials 1`] = `
+<label>
+  Material
+  <select
+    onChange={[Function]}
+    value={0}
+  >
+    <option
+      value={0}
+    >
+       
+      Gold
+       
+    </option>
+    <option
+      value={1}
+    >
+       
+      Platinum
+       
+    </option>
+    <option
+      value={2}
+    >
+       
+      Silver
+       
+    </option>
+  </select>
+</label>
+`;
+
+exports[`Snapshot test Select component with sizes 1`] = `
+<label>
+  Size
+  <select
+    onChange={[Function]}
+    value={0}
+  >
+    <option
+      value={0}
+    >
+       
+      23
+       
+    </option>
+    <option
+      value={1}
+    >
+       
+      15
+       
+    </option>
+    <option
+      value={2}
+    >
+       
+      10
+       
+    </option>
+  </select>
+</label>
+`;
