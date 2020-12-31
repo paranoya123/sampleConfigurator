@@ -1613,7 +1613,7 @@
     "@svgr/plugin-svgo" "^5.4.0"
     "loader-utils" "^2.0.0"
 
-"@testing-library/dom@^7.28.1", "@testing-library/dom@>=7.21.4":
+"@testing-library/dom@^7.28.1", "@testing-library/dom@>=7", "@testing-library/dom@>=7.21.4":
   "integrity" "sha512-0hhuJSmw/zLc6ewR9cVm84TehuTd7tbqBX9pRNSp8znJ9gTmSgesdbiGZtt8R6dL+2rgaPFp9Yjr7IU1HWm49w=="
   "resolved" "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.29.0.tgz"
   "version" "7.29.0"
@@ -1649,7 +1649,7 @@
     "@babel/runtime" "^7.12.5"
     "@testing-library/dom" "^7.28.1"
 
-"@testing-library/user-event@^12.1.10":
+"@testing-library/user-event@^12.6.0":
   "integrity" "sha512-FNEH/HLmOk5GO70I52tKjs7WvGYckeE/SrnLX/ip7z2IGbffyd5zOUM1tZ10vsTphqm+VbDFI0oaXu0wcfQsAQ=="
   "resolved" "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-12.6.0.tgz"
   "version" "12.6.0"
@@ -9347,6 +9347,13 @@
     "workbox-webpack-plugin" "5.1.4"
   optionalDependencies:
     "fsevents" "^2.1.3"
+
+"react-select-event@^5.1.0":
+  "integrity" "sha512-D5DzJlYCdZsGbDVFMQFynrG0OLalJM3ZzDT7KQADNVWE604JCeQF9bIuvPZqVD7IzhnPsFzOUCsilzDA6w6WRQ=="
+  "resolved" "https://registry.npmjs.org/react-select-event/-/react-select-event-5.1.0.tgz"
+  "version" "5.1.0"
+  dependencies:
+    "@testing-library/dom" ">=7"
 
 "react-shallow-renderer@^16.13.1":
   "integrity" "sha512-rkIMcQi01/+kxiTE9D3fdS959U1g7gs+/rborw++42m1O9FAQiNI/UNRZExVUoAOprn4umcXf+pFRou8i4zuBg=="

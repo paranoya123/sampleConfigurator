@@ -6,8 +6,8 @@ import Fineness from './types/Fineness'
 import Color from './types/Color'
 import {calculatePrice} from './helpers/calculate'
 
-function App(props: {materials: Array<Material>, sizes: Array<{name: string}>}) {
-  const {materials, sizes} = props
+function App(props: {materials: Array<Material>, sizes: Array<{name: string}>,  matrix: Array<Array<Array<number>>>}) {
+  const {materials, sizes, matrix} = props
   const [selectedMaterial, setSelectedMaterial] = useState(0)
   const [selectedColor, setSelectedColor] = useState(0)
   const [selectedFineness, setSelectedFineness] = useState(0)
@@ -43,14 +43,14 @@ function App(props: {materials: Array<Material>, sizes: Array<{name: string}>}) 
   }
 
   useEffect(() => {
-      const m = materials[selectedMaterial]
       const engravingLength = engraving.replace(/\s/g, '').length
-      const price = calculatePrice(m.colors[selectedColor].price,
-                        m.fineness[selectedFineness].price,
+      const price = calculatePrice(selectedColor,
+                        selectedFineness,
                         +sizes[selectedSize].name,
-                        engravingLength)
+                        engravingLength,
+                        matrix[selectedMaterial])
       setPrice(price)
-   }, [engraving, selectedSize, selectedFineness, selectedColor, selectedMaterial])
+   }, [engraving, selectedSize, selectedFineness, selectedColor, selectedMaterial, sizes, matrix])
 
   return (
       <div className={'App'}>
@@ -81,7 +81,7 @@ function App(props: {materials: Array<Material>, sizes: Array<{name: string}>}) 
 
         <label>
             Engraving :
-            <input type="text" value={engraving} onChange={onChangeEngraving} />
+            <input data-testid="input" type="text" value={engraving} onChange={onChangeEngraving} />
         </label>
 
         <label>Price: {price}</label>

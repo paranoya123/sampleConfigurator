@@ -4,13 +4,17 @@ import './index.css'
 import App from './App'
 import Material from "./types/Material";
 
-const colorsForGold = [{name: 'Red', price: 1000}, {name: 'Green', price: 333} ,{name: 'Blue', price: 334}]
-const colorsForPlatinum = [{name: 'White', price: 500}, {name: 'Yellow', price: 67} ,{name: 'Blue', price: 32}]
-const colorsForSilver = [{name: 'Black', price: 100}, {name: 'Green', price: 88} ,{name: 'Grey', price: 93}]
+const priceMatrixGold = [[1000, 200, 300], [800, 900, 100], [500, 800, 1100]]
+const priceMatrixPlatinum = [[1000, 2000, 3000], [8000, 9000, 1000], [5000, 8000, 11000]]
+const priceMatrixSilver = [[100, 20, 30], [80, 90, 10], [50, 80, 110]]
 
-const finenessForGold = [{name: '500', price: 200}, {name: '585', price: 23} ,{name: '700', price: 83}]
-const finenessForPlatinum = [{name: '322', price: 500}, {name: '888', price: 90} ,{name: '444', price: 99}]
-const finenessForSilver = [{name: '323', price: 100}, {name: '898', price: 84} ,{name: '999', price: 43}]
+const colorsForGold = [{name: 'Red'}, {name: 'Green'} ,{name: 'Blue'}]
+const colorsForPlatinum = [{name: 'White'}, {name: 'Yellow'} ,{name: 'Blue'}]
+const colorsForSilver = [{name: 'Black'}, {name: 'Green'} ,{name: 'Grey'}]
+
+const finenessForGold = [{name: '500'}, {name: '585'} ,{name: '700'}]
+const finenessForPlatinum = [{name: '322'}, {name: '888'} ,{name: '444'}]
+const finenessForSilver = [{name: '323'}, {name: '898'} ,{name: '999'}]
 
 
 const data: Array<Material> = [{name: 'Gold', colors: colorsForGold, fineness: finenessForGold},
@@ -24,6 +28,7 @@ ReactDOM.render(
     <App
         materials={data}
         sizes={sizes}
+        matrix={[priceMatrixGold, priceMatrixPlatinum, priceMatrixSilver]}
     />
   </React.StrictMode>,
   document.getElementById('root')

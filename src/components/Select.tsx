@@ -9,9 +9,9 @@ export function Select(props: {name: string,
     return (
         <label>
             {name}
-            <select value={selected} onChange={onChange}>
+            <select data-testid="select" value={selected} onChange={onChange}>
                 {options.map((o, i)=>(
-                    <option key = {i} value = {i}> {o.name} </option>
+                    <option data-testid="select-option" key = {i} value = {i}> {o.name} </option>
                 ))}
             </select>
         </label>
