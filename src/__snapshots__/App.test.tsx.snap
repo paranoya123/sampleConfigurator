@@ -7,7 +7,7 @@ exports[`Snapshot test App component 1`] = `
   <label>
     Material
     <select
-      data-testid="select"
+      data-testid="Material"
       onChange={[Function]}
       value={0}
     >
@@ -16,7 +16,7 @@ exports[`Snapshot test App component 1`] = `
         value={0}
       >
          
-        Gold
+        silver
          
       </option>
       <option
@@ -24,7 +24,7 @@ exports[`Snapshot test App component 1`] = `
         value={1}
       >
          
-        Platinum
+        gold
          
       </option>
       <option
@@ -32,7 +32,7 @@ exports[`Snapshot test App component 1`] = `
         value={2}
       >
          
-        Silver
+        platinum
          
       </option>
     </select>
@@ -40,7 +40,7 @@ exports[`Snapshot test App component 1`] = `
   <label>
     Color
     <select
-      data-testid="select"
+      data-testid="Color"
       onChange={[Function]}
       value={0}
     >
@@ -49,7 +49,7 @@ exports[`Snapshot test App component 1`] = `
         value={0}
       >
          
-        Red
+        white
          
       </option>
       <option
@@ -57,7 +57,7 @@ exports[`Snapshot test App component 1`] = `
         value={1}
       >
          
-        Green
+        metal
          
       </option>
       <option
@@ -65,7 +65,7 @@ exports[`Snapshot test App component 1`] = `
         value={2}
       >
          
-        Blue
+        grey
          
       </option>
     </select>
@@ -73,7 +73,7 @@ exports[`Snapshot test App component 1`] = `
   <label>
     Fineness
     <select
-      data-testid="select"
+      data-testid="Fineness"
       onChange={[Function]}
       value={0}
     >
@@ -106,7 +106,7 @@ exports[`Snapshot test App component 1`] = `
   <label>
     Sizes
     <select
-      data-testid="select"
+      data-testid="Sizes"
       onChange={[Function]}
       value={0}
     >
@@ -140,12 +140,15 @@ exports[`Snapshot test App component 1`] = `
     Engraving :
     <input
       data-testid="input"
+      id="engraving"
       onChange={[Function]}
       type="text"
       value=""
     />
   </label>
-  <label>
+  <label
+    id="price"
+  >
     Price: 
     0
   </label>
@@ -156,7 +159,7 @@ exports[`Snapshot test Select component with materials 1`] = `
 <label>
   Material
   <select
-    data-testid="select"
+    data-testid="Material"
     onChange={[Function]}
     value={0}
   >
@@ -165,7 +168,7 @@ exports[`Snapshot test Select component with materials 1`] = `
       value={0}
     >
        
-      Gold
+      silver
        
     </option>
     <option
@@ -173,7 +176,7 @@ exports[`Snapshot test Select component with materials 1`] = `
       value={1}
     >
        
-      Platinum
+      gold
        
     </option>
     <option
@@ -181,7 +184,7 @@ exports[`Snapshot test Select component with materials 1`] = `
       value={2}
     >
        
-      Silver
+      platinum
        
     </option>
   </select>
@@ -192,7 +195,7 @@ exports[`Snapshot test Select component with sizes 1`] = `
 <label>
   Size
   <select
-    data-testid="select"
+    data-testid="Size"
     onChange={[Function]}
     value={0}
   >

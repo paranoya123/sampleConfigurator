@@ -9,7 +9,7 @@ export function Select(props: {name: string,
     return (
         <label>
             {name}
-            <select data-testid="select" value={selected} onChange={onChange}>
+            <select data-testid={name} value={selected} onChange={onChange}>
                 {options.map((o, i)=>(
                     <option data-testid="select-option" key = {i} value = {i}> {o.name} </option>
                 ))}

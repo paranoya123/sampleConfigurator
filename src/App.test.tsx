@@ -4,26 +4,80 @@ import {Select} from './components/Select'
 import Material from "./types/Material"
 import {calculatePrice} from './helpers/calculate'
 import renderer from 'react-test-renderer'
-import { render, screen, fireEvent, getByText } from '@testing-library/react'
+import { mount, configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 
-const priceMatrixGold = [[1000, 200, 300], [800, 900, 100], [500, 800, 1100]]
-const priceMatrixPlatinum = [[1000, 2000, 3000], [8000, 9000, 1000], [5000, 8000, 11000]]
-const priceMatrixSilver = [[100, 20, 30], [80, 90, 10], [50, 80, 110]]
+configure({ adapter: new Adapter() })
 
-const colorsForGold = [{name: 'Red'}, {name: 'Green'} ,{name: 'Blue'}]
-const colorsForPlatinum = [{name: 'White'}, {name: 'Yellow'} ,{name: 'Blue'}]
-const colorsForSilver = [{name: 'Black'}, {name: 'Green'} ,{name: 'Grey'}]
+const gold = 1, silver = 0, platinum = 2
 
+const priceMatrix = [
+    {material: 'silver', colors: [
+            {color: 'white', finenessCollection: [
+                    {fineness: '500', price: 10},
+                    {fineness: '585', price: 2},
+                    {fineness: '700', price: 3},
+                ]},
+            {color: 'metal', finenessCollection: [
+                    {fineness: '500', price: 20},
+                    {fineness: '585', price: 3},
+                    {fineness: '700', price: 4},
+                ]},
+            {color: 'grey', finenessCollection: [
+                    {fineness: '500', price: 30},
+                    {fineness: '585', price: 4},
+                    {fineness: '700', price: 5},
+                ]}]},
+    {material: 'gold', colors: [
+            {color: 'yellow', finenessCollection: [
+                    {fineness: '500', price: 100},
+                    {fineness: '585', price: 20},
+                    {fineness: '700', price: 30},
+                ]},
+            {color: 'blue', finenessCollection: [
+                    {fineness: '500', price: 200},
+                    {fineness: '585', price: 30},
+                    {fineness: '700', price: 40},
+                ]},
+            {color: 'red', finenessCollection: [
+                    {fineness: '500', price: 300},
+                    {fineness: '585', price: 40},
+                    {fineness: '700', price: 50},
+                ]}]},
+    {material: 'platinum', colors: [
+            {color: 'white', finenessCollection: [
+                    {fineness: '500', price: 1000},
+                    {fineness: '585', price: 200},
+                    {fineness: '700', price: 300},
+                ]},
+            {color: 'yellow', finenessCollection: [
+                    {fineness: '500', price: 2000},
+                    {fineness: '585', price: 300},
+                    {fineness: '700', price: 400},
+                ]},
+            {color: 'grey', finenessCollection: [
+                    {fineness: '500', price: 3000},
+                    {fineness: '585', price: 400},
+                    {fineness: '700', price: 500},
+                ]}]}
+]
+
+const colorsForSilver = [{name: 'white'}, {name: 'metal'} ,{name: 'grey'}]
+const colorsForGold = [{name: 'yellow'}, {name: 'blue'} ,{name: 'red'}]
+const colorsForPlatinum = [{name: 'white'}, {name: 'yellow'} ,{name: 'grey'}]
+
+const finenessForSilver = [{name: '500'}, {name: '585'} ,{name: '700'}]
 const finenessForGold = [{name: '500'}, {name: '585'} ,{name: '700'}]
-const finenessForPlatinum = [{name: '322'}, {name: '888'} ,{name: '444'}]
-const finenessForSilver = [{name: '323'}, {name: '898'} ,{name: '999'}]
+const finenessForPlatinum = [{name: '500'}, {name: '585'} ,{name: '700'}]
 
 
-const data: Array<Material> = [{name: 'Gold', colors: colorsForGold, fineness: finenessForGold},
-  {name: 'Platinum', colors: colorsForPlatinum, fineness: finenessForPlatinum},
-  {name: 'Silver', colors: colorsForSilver, fineness: finenessForSilver}]
+
+const data: Array<Material> = [{name: 'silver', colors: colorsForSilver, fineness: finenessForSilver},
+    {name: 'gold', colors: colorsForGold, fineness: finenessForGold},
+    {name: 'platinum', colors: colorsForPlatinum, fineness: finenessForPlatinum}]
 
 const sizes  = [{name: '23'}, {name: '15'}, {name: '10'}]
+
 
 
 test('Snapshot test App component', () => {
@@ -31,7 +85,7 @@ test('Snapshot test App component', () => {
       .create(<App
           materials={data}
           sizes={sizes}
-          matrix={[priceMatrixGold, priceMatrixPlatinum, priceMatrixSilver]}
+          matrix={priceMatrix}
       />)
       .toJSON()
   expect(snapshot).toMatchSnapshot()
@@ -62,100 +116,62 @@ test('Snapshot test Select component with sizes', () => {
 })
 
 test('calculate price test1', () => {
-  const colorIndex = 1
-  const finenessIndex = 0
+  const color = 'metal'
+  const fineness = '500'
   const size = 23
   const engravingLength = 4
-  expect(calculatePrice(colorIndex, finenessIndex, size, engravingLength, priceMatrixGold)).toBe(18440)
+  expect(calculatePrice(color, fineness, size, engravingLength, priceMatrix[silver])).toBe(500)
 })
 
 test('calculate price test2', () => {
-  const colorIndex = 1
-  const finenessIndex = 2
+  const color = 'metal'
+  const fineness = '585'
   const size = 0
   const engravingLength = 4
-  expect(calculatePrice(colorIndex, finenessIndex, size, engravingLength, priceMatrixGold)).toBe(40)
+  expect(calculatePrice(color, fineness, size, engravingLength, priceMatrix[silver])).toBe(40)
 })
 
 //E2E TESTS
 
-
-test('test material select', () => {
-  const { getByTestId, getAllByTestId } = render(<App
+test('test calculate price after ui update with engraving', () => {
+  const wrapper = mount(<App
       materials={data}
       sizes={sizes}
-      matrix={[priceMatrixGold, priceMatrixPlatinum, priceMatrixSilver]}
+      matrix={priceMatrix}
   />)
-  const select = getAllByTestId('select')[0]
-  expect(select).toHaveValue('0')
-  fireEvent.change(select, { target: { value: 2 } })
-  expect(select).toHaveValue('2')
+  expect(wrapper.render().find('#price').text()).toEqual('Price: 230')
+  wrapper.find('select[data-testid="Material"]').simulate('change', { target: { value: '1' } } )
+  wrapper.find('select[data-testid="Color"]').simulate('change', { target: { value: '1' } } )
+  wrapper.find('select[data-testid="Sizes"]').simulate('change', { target: { value: '2' } } )
+  wrapper.find('input#engraving').simulate('change', { target: { value: 'te st' } } )
+  expect(wrapper.render().find('#price').text()).toEqual('Price: 2040')
 })
 
-test('test color select', () => {
-  const { getByTestId, getAllByTestId } = render(<App
+test('test calculate price after ui update without engraving', () => {
+  const wrapper = mount(<App
       materials={data}
       sizes={sizes}
-      matrix={[priceMatrixGold, priceMatrixPlatinum, priceMatrixSilver]}
+      matrix={priceMatrix}
   />)
-  const select = getAllByTestId('select')[1]
-  expect(select).toHaveValue('0')
-  fireEvent.change(select, { target: { value: 1 } })
-  expect(select).toHaveValue('1')
+  expect(wrapper.render().find('#price').text()).toEqual('Price: 230')
+  wrapper.find('select[data-testid="Material"]').simulate('change', { target: { value: '1' } } )
+  wrapper.find('select[data-testid="Color"]').simulate('change', { target: { value: '2' } } )
+  wrapper.find('select[data-testid="Fineness"]').simulate('change', { target: { value: '2' } } )
+  expect(wrapper.render().find('#price').text()).toEqual('Price: 1150')
 })
 
-test('test fineness select', () => {
-  const { getByTestId, getAllByTestId } = render(<App
+test('test calculate price after ui update after reset Color and Material', () => {
+  const wrapper = mount(<App
       materials={data}
       sizes={sizes}
-      matrix={[priceMatrixGold, priceMatrixPlatinum, priceMatrixSilver]}
+      matrix={priceMatrix}
   />)
-  const select = getAllByTestId('select')[2]
-  expect(select).toHaveValue('0')
-  fireEvent.change(select, { target: { value: 2 } })
-  expect(select).toHaveValue('2')
+  expect(wrapper.render().find('#price').text()).toEqual('Price: 230')
+  wrapper.find('select[data-testid="Color"]').simulate('change', { target: { value: '1' } } )
+  wrapper.find('select[data-testid="Fineness"]').simulate('change', { target: { value: '1' } } )
+  wrapper.find('select[data-testid="Material"]').simulate('change', { target: { value: '2' } } )
+  expect(wrapper.render().find('#price').text()).toEqual('Price: 23000')
 })
 
-test('test sizes select', () => {
-  const { getByTestId, getAllByTestId } = render(<App
-      materials={data}
-      sizes={sizes}
-      matrix={[priceMatrixGold, priceMatrixPlatinum, priceMatrixSilver]}
-  />)
-  const select = getAllByTestId('select')[3]
-  expect(select).toHaveValue('0')
-  fireEvent.change(select, { target: { value: 1 } })
-  expect(select).toHaveValue('1')
-})
 
-test('test reset selects after material changed', () => {
-  const { getByTestId, getAllByTestId } = render(<App
-      materials={data}
-      sizes={sizes}
-      matrix={[priceMatrixGold, priceMatrixPlatinum, priceMatrixSilver]}
-  />)
-  const selectM = getAllByTestId('select')[0]
-  const selectC = getAllByTestId('select')[1]
-  const selectF = getAllByTestId('select')[2]
-  expect(selectM).toHaveValue('0')
-  fireEvent.change(selectC, { target: { value: 1 } })
-  fireEvent.change(selectF, { target: { value: 2 } })
-  fireEvent.change(selectM, { target: { value: 1 } })
-  expect(selectC).toHaveValue('0')
-  expect(selectF).toHaveValue('0')
-})
-
-test('test input engraving', () => {
-  const { getByTestId, getAllByTestId } = render(<App
-      materials={data}
-      sizes={sizes}
-      matrix={[priceMatrixGold, priceMatrixPlatinum, priceMatrixSilver]}
-  />)
-  const input = getByTestId('input')
-
-  expect(input).toHaveValue('')
-  fireEvent.input(input, { target: { value: 'te st' } })
-
-  expect(input).toHaveValue('te st')
-})
 
